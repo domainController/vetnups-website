@@ -1,0 +1,384 @@
+<title>Vetnups — Checkout (simulation)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #FFFFFF;
+    --surface: #F7F8F7;
+    --surface-line: #D6DAD8;
+    --ink: #14181A;
+    --ink-soft: #4C5352;
+    --ink-faint: #868D8B;
+    --accent: #8C6A2E;
+    --accent-soft: #A9863F;
+    --stamp: #A9863F;
+    --focus: #8C6A2E;
+    --warn-bg: #FBF3E6;
+    --warn-ink: #7A5A1E;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #14171A;
+      --surface: #1C2023;
+      --surface-line: #333A3C;
+      --ink: #ECEEEC;
+      --ink-soft: #AEB6B4;
+      --ink-faint: #6F7877;
+      --accent: #D2A85C;
+      --accent-soft: #C4995A;
+      --stamp: #D2A85C;
+      --focus: #D2A85C;
+      --warn-bg: #2A2314;
+      --warn-ink: #D2A85C;
+    }
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "IBM Plex Sans", -apple-system, "Segoe UI", sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; }
+
+  :focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 3px;
+  }
+
+  .wrap {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  .label {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  header {
+    padding: 28px 0;
+    border-bottom: 1px solid var(--surface-line);
+  }
+
+  .header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .wordmark {
+    font-family: "IBM Plex Serif", Georgia, serif;
+    font-weight: 600;
+    font-size: 20px;
+    letter-spacing: -0.005em;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    text-decoration: none;
+  }
+
+  .wordmark .mark { width: 15px; height: 15px; stroke: var(--accent); }
+
+  .back-link {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 13px;
+    color: var(--ink-faint);
+    text-decoration: none;
+  }
+  .back-link:hover { color: var(--ink); }
+
+  .sim-banner {
+    background: var(--warn-bg);
+    color: var(--warn-ink);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 10px 16px;
+  }
+
+  main { padding: 56px 0 96px; }
+
+  h1 {
+    font-family: "IBM Plex Serif", Georgia, serif;
+    font-weight: 600;
+    font-size: clamp(1.6rem, 3vw, 2rem);
+    margin: 0 0 8px;
+  }
+
+  .subhead {
+    color: var(--ink-soft);
+    font-size: 15px;
+    margin: 0 0 40px;
+  }
+
+  .summary-card {
+    background: var(--surface);
+    border: 1px solid var(--surface-line);
+    padding: 24px;
+    margin-bottom: 32px;
+  }
+
+  .summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 10px 0;
+  }
+
+  .summary-row + .summary-row { border-top: 1px solid var(--surface-line); }
+
+  .summary-row .k { color: var(--ink-soft); font-size: 14px; }
+  .summary-row .v { font-weight: 600; }
+
+  .summary-row.total .v {
+    font-family: "IBM Plex Serif", Georgia, serif;
+    font-size: 20px;
+  }
+
+  fieldset {
+    border: none;
+    padding: 0;
+    margin: 0 0 32px;
+  }
+
+  legend {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    padding: 0 0 14px;
+  }
+
+  .method-list {
+    display: grid;
+    gap: 10px;
+  }
+
+  .method {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    border: 1px solid var(--surface-line);
+    padding: 14px 16px;
+    cursor: pointer;
+    transition: border-color 0.15s ease;
+  }
+
+  .method:has(input:checked) { border-color: var(--accent); }
+
+  .method input { accent-color: var(--accent); }
+
+  .method img { height: 20px; width: auto; }
+
+  .method span { font-size: 15px; }
+
+  .card-fields {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  .card-fields-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .field {
+    padding: 14px 16px;
+    background: var(--bg);
+    border: 1px solid var(--surface-line);
+    color: var(--ink);
+    font-family: "IBM Plex Sans", sans-serif;
+    font-size: 15px;
+  }
+
+  .field::placeholder { color: var(--ink-faint); }
+
+  .btn {
+    width: 100%;
+    padding: 16px 26px;
+    background: var(--ink);
+    color: var(--bg);
+    border: 1px solid var(--ink);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: opacity 0.15s ease;
+  }
+
+  .btn:hover { opacity: 0.82; }
+
+  .fine-print {
+    margin-top: 18px;
+    font-size: 12px;
+    color: var(--ink-faint);
+    text-align: center;
+    line-height: 1.6;
+  }
+
+  .confirmation {
+    display: none;
+    text-align: center;
+    padding: 40px 0;
+  }
+
+  .confirmation.show { display: block; }
+  .confirmation .mark-ok {
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    color: var(--accent);
+    font-size: 20px;
+  }
+
+  .checkout-form.hide { display: none; }
+
+  footer {
+    padding: 28px 0 48px;
+    border-top: 1px solid var(--surface-line);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px;
+    color: var(--ink-faint);
+    text-align: center;
+  }
+
+  @media (max-width: 640px) {
+    .wrap { padding: 0 20px; }
+    .card-fields-row { grid-template-columns: 1fr; }
+  }
+</style>
+
+<body>
+
+  <div class="sim-banner">Simulation only — no real charge, no legal entity yet</div>
+
+  <header>
+    <div class="wrap header-row">
+      <a class="wordmark" href="index.html">
+        Vetnups
+        <svg class="mark" viewBox="0 0 20 20" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M2 10 L10 2 L18 10"/>
+          <path d="M4 9.5 V17 H16 V9.5"/>
+          <circle cx="8" cy="13" r="1.1" fill="var(--accent)" stroke="none"/>
+          <circle cx="12" cy="13" r="1.1" fill="var(--accent)" stroke="none"/>
+        </svg>
+      </a>
+      <a class="back-link" href="index.html">&larr; Back</a>
+    </div>
+  </header>
+
+  <main class="wrap">
+
+    <h1>Activate your profile</h1>
+    <p class="subhead">This is a mockup of the payment step described in "How it works." Nothing here is connected to a real processor.</p>
+
+    <div class="summary-card">
+      <div class="summary-row">
+        <span class="k">Plan</span>
+        <span class="v">Vetnups membership</span>
+      </div>
+      <div class="summary-row">
+        <span class="k">Billing</span>
+        <span class="v">Monthly, cancel anytime</span>
+      </div>
+      <div class="summary-row total">
+        <span class="k">Due at launch</span>
+        <span class="v">€2–3/month</span>
+      </div>
+    </div>
+
+    <form class="checkout-form" id="checkout-form" onsubmit="return handleCheckoutSubmit(event);">
+
+      <fieldset>
+        <legend>Payment method</legend>
+        <div class="method-list">
+          <label class="method">
+            <input type="radio" name="method" value="card" checked>
+            <span>Credit or debit card</span>
+          </label>
+          <label class="method">
+            <input type="radio" name="method" value="ideal">
+            <img src="https://cdn.simpleicons.org/ideal/CC0066" alt="">
+            <span>iDEAL</span>
+          </label>
+          <label class="method">
+            <input type="radio" name="method" value="paypal">
+            <img src="https://cdn.simpleicons.org/paypal/003087" alt="">
+            <span>PayPal</span>
+          </label>
+          <label class="method">
+            <input type="radio" name="method" value="sepa">
+            <img src="https://cdn.simpleicons.org/sepa/003399" alt="">
+            <span>SEPA direct debit</span>
+          </label>
+        </div>
+
+        <div class="card-fields">
+          <input class="field" type="text" placeholder="Card number" inputmode="numeric" aria-label="Card number">
+          <div class="card-fields-row">
+            <input class="field" type="text" placeholder="MM / YY" aria-label="Expiry date">
+            <input class="field" type="text" placeholder="CVC" inputmode="numeric" aria-label="Security code">
+          </div>
+        </div>
+      </fieldset>
+
+      <button class="btn" type="submit">Confirm simulated payment</button>
+      <p class="fine-print">No card is charged. Real payment opens once Vetnups has a legal entity to collect through.</p>
+    </form>
+
+    <div class="confirmation" id="confirmation">
+      <div class="mark-ok">&#10003;</div>
+      <h1>Simulated — this is what confirmation looks like</h1>
+      <p class="subhead">In the real flow, this is where document verification would start.</p>
+      <a class="back-link" href="index.html">&larr; Back to Vetnups</a>
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="wrap">Vetnups — mockup for internal review, not a live product</div>
+  </footer>
+
+  <script>
+    function handleCheckoutSubmit(event) {
+      event.preventDefault();
+      if (window._paq) {
+        _paq.push(['trackEvent', 'Checkout', 'simulate', 'Confirm simulated payment']);
+      }
+      document.getElementById('checkout-form').classList.add('hide');
+      document.getElementById('confirmation').classList.add('show');
+      return false;
+    }
+  </script>
+
+</body>
