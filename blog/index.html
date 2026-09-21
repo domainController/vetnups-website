@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vetnups — Blog</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@600&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FFFFFF; --ink: #14181A; --ink-soft: #4C5352; --accent: #8C6A2E;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #14171A; --ink: #ECEEEC; --ink-soft: #AEB6B4; --accent: #D2A85C;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: "IBM Plex Sans", sans-serif; -webkit-font-smoothing: antialiased;
+    display:flex; align-items:center; justify-content:center; min-height:100vh;
+  }
+  .wrap{ max-width:480px; padding:0 32px; text-align:center; }
+  .wordmark{ font-family: "IBM Plex Serif", serif; font-weight: 600; font-size: 20px; margin-bottom:32px; }
+  h1{ font-family: "IBM Plex Serif", serif; font-weight: 600; font-size: 30px; margin:0 0 16px; }
+  p{ color:var(--ink-soft); font-size:15px; line-height:1.6; margin:0 0 28px; }
+  a.home{ font-family:"IBM Plex Mono", monospace; font-size:12.5px; color:var(--accent); text-decoration:none; border-bottom:1px solid var(--accent); padding-bottom:1px; }
+  a.home:hover{ opacity:0.7; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="wordmark">Vetnups</div>
+    <h1>Blog — coming soon</h1>
+    <p>This is a placeholder. Nothing published yet.</p>
+    <a class="home" href="../index.html">&larr; Back to vetnups.com</a>
+  </div>
+</body>
+</html>
