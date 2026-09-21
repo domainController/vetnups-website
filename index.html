@@ -404,9 +404,35 @@
 
   .benefits { padding: 8px 0 72px; }
   .benefits h2 { font-family: "IBM Plex Serif", Georgia, serif; font-weight: 600; font-size: clamp(1.4rem, 2.4vw, 1.8rem); margin: 0 0 24px; }
-  .benefits-list { list-style: none; padding: 0; margin: 0; }
-  .benefits-list li { padding: 12px 0; border-bottom: 1px solid var(--surface-line); font-size: 17px; color: var(--ink-soft); }
-  .benefits-list li:last-child { border-bottom: none; }
+  .benefits-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 24px; }
+  .benefit-card {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    background-color: var(--surface);
+    background-size: cover;
+    background-position: center;
+    border: 1px solid var(--surface-line);
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+  }
+  .benefit-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 45%, rgba(0,0,0,0.78) 100%);
+  }
+  .benefit-text {
+    position: relative;
+    z-index: 1;
+    color: #fff;
+    font-family: "IBM Plex Serif", Georgia, serif;
+    font-weight: 600;
+    font-size: 17px;
+    line-height: 1.35;
+    padding: 20px;
+  }
+  @media (max-width: 640px) { .benefits-grid { grid-template-columns: 1fr; } }
 
   /* ---------- Sample profile ---------- */
 
@@ -506,12 +532,28 @@ your local Vetlabs.
   <section class="benefits">
     <div class="wrap">
       <h2>What Vetnups changes for you</h2>
-      <ul class="benefits-list">
-        <li>No swiping, no games.</li>
-        <li>Verified attributes, not just photos.</li>
-        <li>A real place to meet — online and in person.</li>
-        <li>No ads. No marketing emails. Only account administration.</li>
-      </ul>
+      <!--
+        Photos à fournir — candides, pas de stock générique. Un fichier par carte :
+        1. benefit-1 : "no swiping, no games" — un couple réel, pas posé.
+        2. benefit-2 : "verified attributes" — piste identité/vérification (ex. passeport, voyage).
+        3. benefit-3 : "a real place to meet" — entrée d'immeuble, hall, boîtes aux lettres.
+        4. benefit-4 : "no ads, no marketing emails" — au choix, dans le même esprit vécu/quotidien.
+        Dépose les fichiers dans assets/ sous ces noms (jpg/png) et le fond s'affichera automatiquement.
+      -->
+      <div class="benefits-grid">
+        <div class="benefit-card" style="background-image:url('assets/benefit-1.jpg')">
+          <span class="benefit-text">No swiping, no games.</span>
+        </div>
+        <div class="benefit-card" style="background-image:url('assets/benefit-2.jpg')">
+          <span class="benefit-text">Verified attributes, not just photos.</span>
+        </div>
+        <div class="benefit-card" style="background-image:url('assets/benefit-3.jpg')">
+          <span class="benefit-text">A real place to meet — online and in person.</span>
+        </div>
+        <div class="benefit-card" style="background-image:url('assets/benefit-4.jpg')">
+          <span class="benefit-text">No ads. No marketing emails. Only account administration.</span>
+        </div>
+      </div>
     </div>
   </section>
 
