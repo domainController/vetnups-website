@@ -411,10 +411,9 @@
   /* ---------- Sample profile ---------- */
 
   .sample-profile { padding: 8px 0 96px; border-top: 1px solid var(--surface-line); }
-  .profile-gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 24px; }
+  .profile-gallery { margin-top: 24px; max-width: 420px; }
   .profile-gallery img { width: 100%; height: auto; display: block; border: 1px solid var(--surface-line); }
   .profile-caption { margin-top: 18px; font-size: 14px; color: var(--ink-faint); }
-  @media (max-width: 720px) { .profile-gallery { grid-template-columns: 1fr; } }
 
   /* ---------- Video ---------- */
 
@@ -554,9 +553,6 @@ your local Vetlabs.
         <span class="file-no">Sample profile — verified attributes</span>
       </div>
       <div class="profile-gallery">
-        <img src="assets/profile-1.png" alt="Sample Vetnups profile — identity and attributes" loading="lazy">
-        <img src="assets/profile-2.png" alt="Sample Vetnups profile — aspirations and family" loading="lazy">
-        <img src="assets/profile-3.png" alt="Sample Vetnups profile — verification and career" loading="lazy">
         <img src="assets/profile-4.png" alt="Sample Vetnups profile — full view" loading="lazy">
       </div>
       <p class="profile-caption">A verified profile: identity, aspirations, family, career, and lifestyle — all in one place.</p>
