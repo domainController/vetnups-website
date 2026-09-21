@@ -119,28 +119,6 @@
     header .label { display: block; }
   }
 
-  .header-right {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 4px;
-  }
-
-  .nav-ventures {
-    display: none;
-    gap: 12px;
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 11px;
-    color: var(--ink-faint);
-  }
-
-  .nav-ventures a { text-decoration: none; }
-  .nav-ventures a:hover { color: var(--accent); }
-
-  @media (min-width: 640px) {
-    .nav-ventures { display: flex; }
-  }
-
   /* ---------- Hero ---------- */
 
   .hero {
@@ -517,14 +495,7 @@
           <circle cx="12" cy="13" r="1.1" fill="var(--accent)" stroke="none"/>
         </svg>
       </div>
-      <div class="header-right">
-        <div class="label">Commitment-oriented dating app with vetted profile attributes.</div>
-        <div class="nav-ventures">
-          <a href="https://curb.exchange">Curb</a>
-          <a href="https://cohort.reviews">Cohort</a>
-          <a href="https://clusters.homes">Clusters</a>
-        </div>
-      </div>
+      <div class="label">Commitment-oriented dating app with vetted profile attributes.</div>
     </div>
   </header>
 
