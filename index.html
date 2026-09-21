@@ -391,6 +391,50 @@
     border-radius: 50%;
     background: var(--accent);
   }
+.vetted-definition p {
+    max-width: 68ch;
+    margin: 0 0 18px;
+    color: var(--ink-soft);
+    font-size: 16px;
+    line-height: 1.65;
+  }
+  .vetted-definition p:last-child { margin-bottom: 0; }
+
+  /* ---------- Benefits ---------- */
+
+  .benefits { padding: 8px 0 72px; }
+  .benefits h2 { font-family: "IBM Plex Serif", Georgia, serif; font-weight: 600; font-size: clamp(1.4rem, 2.4vw, 1.8rem); margin: 0 0 24px; }
+  .benefits-list { list-style: none; padding: 0; margin: 0; }
+  .benefits-list li { padding: 12px 0; border-bottom: 1px solid var(--surface-line); font-size: 17px; color: var(--ink-soft); }
+  .benefits-list li:last-child { border-bottom: none; }
+
+  /* ---------- Sample profile ---------- */
+
+  .sample-profile { padding: 8px 0 96px; border-top: 1px solid var(--surface-line); }
+  .profile-gallery { margin-top: 24px; max-width: 420px; }
+  .profile-gallery img { width: 100%; height: auto; display: block; border: 1px solid var(--surface-line); }
+  .profile-caption { margin-top: 18px; font-size: 14px; color: var(--ink-faint); }
+
+  /* ---------- Video ---------- */
+
+  .video-section { padding: 8px 0 96px; }
+  .video-section h2 { font-family: "IBM Plex Serif", Georgia, serif; font-weight: 600; font-size: clamp(1.4rem, 2.4vw, 1.8rem); margin: 0 0 24px; }
+  .video-placeholder { aspect-ratio: 16 / 9; background: var(--surface); border: 1px dashed var(--surface-line); display: flex; align-items: center; justify-content: center; color: var(--ink-faint); font-family: "IBM Plex Mono", monospace; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; }
+
+  /* ---------- How it works ---------- */
+
+  .how-it-works { padding: 8px 0 96px; }
+  .how-it-works h2 { font-family: "IBM Plex Serif", Georgia, serif; font-weight: 600; font-size: clamp(1.4rem, 2.4vw, 1.8rem); margin: 0 0 24px; }
+  .steps { list-style: decimal; padding-left: 24px; margin: 0 0 24px; }
+  .steps li { padding: 10px 0; font-size: 16px; color: var(--ink-soft); }
+  .pricing-note { font-family: "IBM Plex Mono", monospace; font-size: 13px; color: var(--accent-soft); letter-spacing: 0.04em; }
+
+  /* ---------- Payment logos ---------- */
+
+  .payment-logos { display: flex; flex-wrap: wrap; gap: 18px; align-items: center; margin-top: 28px; }
+  .payment-logos img { height: 22px; width: auto; opacity: 0.75; transition: opacity 0.15s ease; }
+  .payment-logos img:hover { opacity: 1; }
+
 @media (max-width: 640px) {
     body { font-size: 16px; }
     .wrap { padding: 0 20px; }
@@ -434,17 +478,23 @@
           Some attributes are verified through official documents, others in person at
 your local Vetlabs.
         </p>
-        <form onsubmit="return false;">
+        <form onsubmit="if(window._paq){_paq.push(['trackEvent','Form','submit','Request early access']);} return false;">
           <div class="cta-row">
             <input class="email-field" type="email" placeholder="you@email.com" aria-label="Email address" required>
-            <button class="btn" type="submit">Request early access</button>
+            <button class="btn" type="submit" onclick="if(window._paq){_paq.push(['trackEvent','CTA','click','Request early access']);}">Request early access</button>
           </div>
           <p class="cta-note">No swiping to join. We're vetting our first cohort by hand.</p>
           <div class="cta-secondary">
-            <p>Near a launch city and open to verifying in person? Join the list — documents and identity confirmed on the spot, maybe a photo session too, if the timing lines up.</p>
-            <button class="btn-outline" type="button">Book a session</button>
+            <p>Near a launch city and open to verifying in person? Documents and identity confirmed on the spot, maybe a photo session too, if the timing lines up.</p>
           </div>
         </form>
+        <div class="payment-logos">
+          <img src="https://cdn.simpleicons.org/googlepay/4285F4" alt="Google Pay" height="22">
+          <img src="https://cdn.simpleicons.org/paypal/003087" alt="PayPal" height="22">
+          <img src="https://cdn.simpleicons.org/stripe/635BFF" alt="Stripe" height="22">
+          <img src="https://cdn.simpleicons.org/ideal/CC0066" alt="iDEAL" height="22">
+          <img src="https://cdn.simpleicons.org/sepa/003399" alt="SEPA" height="22">
+        </div>
       </div>
       <div class="hero-visual">
         <img src="https://images.unsplash.com/photo-1750639258774-9a714379a093?fm=jpg&amp;q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="Elegant, minimal living room" loading="eager">
@@ -453,11 +503,22 @@ your local Vetlabs.
     </div>
   </section>
 
+  <section class="benefits">
+    <div class="wrap">
+      <h2>What Vetnups changes for you</h2>
+      <ul class="benefits-list">
+        <li>No swiping, no games.</li>
+        <li>Verified attributes, not just photos.</li>
+        <li>A real place to meet — online and in person.</li>
+        <li>No ads. No marketing emails. Only account administration.</li>
+      </ul>
+    </div>
+  </section>
+
   <section class="dossier">
     <div class="wrap">
       <div class="dossier-head">
         <h2>What Vetnups means</h2>
-        <span class="file-no">Sample manifest — 7 of 30+ checks</span>
       </div>
 <div class="vetted-definition">
   <p>
@@ -482,6 +543,49 @@ your local Vetlabs.
     before the commitment.
   </p>
 </div>
+    </div>
+  </section>
+
+  <section class="sample-profile">
+    <div class="wrap">
+      <div class="dossier-head">
+        <h2>What a Vetnups profile looks like</h2>
+        <span class="file-no">Sample profile — verified attributes</span>
+      </div>
+      <div class="profile-gallery">
+        <img src="assets/profile-4.png" alt="Sample Vetnups profile — full view" loading="lazy">
+      </div>
+      <p class="profile-caption">A verified profile: identity, aspirations, family, career, and lifestyle — all in one place.</p>
+    </div>
+  </section>
+
+  <section class="video-section">
+    <div class="wrap">
+      <h2>See how it works</h2>
+      <div class="video-placeholder">
+        <span>Video coming soon</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="how-it-works">
+    <div class="wrap">
+      <h2>How it works</h2>
+      <ol class="steps">
+        <li><strong>Join the waitlist.</strong> Tell us who you are and what you're looking for.</li>
+        <li><strong>We build your profile.</strong> We prepare your profile with the information you provide.</li>
+        <li><strong>We launch.</strong> When we reach enough members, we open the platform.</li>
+        <li><strong>You get verified.</strong> After payment, we verify your documents and activate your profile.</li>
+      </ol>
+      <p class="pricing-note">€2–3/month at launch. No hidden fees. Cancel anytime.</p>
+    </div>
+  </section>
+
+  <section class="dossier">
+    <div class="wrap">
+      <div class="dossier-head">
+        <span class="file-no">Sample manifest — 7 of 30+ checks</span>
+      </div>
       <div class="manifest">
         <div class="row">
           <div class="row-attr">Identity</div>
@@ -525,10 +629,10 @@ your local Vetlabs.
   <section class="closing">
     <div class="wrap">
       <h2>For those who've had enough dating fatigue to last a lifetime.</h2>
-      <form onsubmit="return false;">
+      <form onsubmit="if(window._paq){_paq.push(['trackEvent','Form','submit','Request early access']);} return false;">
         <div class="cta-row">
           <input class="email-field" type="email" placeholder="you@email.com" aria-label="Email address" required>
-          <button class="btn" type="submit">Request early access</button>
+          <button class="btn" type="submit" onclick="if(window._paq){_paq.push(['trackEvent','CTA','click','Request early access']);}">Request early access</button>
         </div>
       </form>
       <p class="stamp">Vetnups — verify what matters to you.</p>
@@ -541,5 +645,19 @@ your local Vetlabs.
       <span class="status-live">Concept landing page — not a live product</span>
     </div>
   </footer>
+
+  <!-- Matomo tracking: guarded so nothing breaks before the tracker is wired in.
+       Add the standard Matomo init snippet above this comment once the site ID exists. -->
+  <script>
+    (function () {
+      var start = Date.now();
+      window.addEventListener('beforeunload', function () {
+        if (window._paq) {
+          var seconds = Math.round((Date.now() - start) / 1000);
+          _paq.push(['trackEvent', 'Engagement', 'time_on_page', seconds]);
+        }
+      });
+    })();
+  </script>
 
 </body>
